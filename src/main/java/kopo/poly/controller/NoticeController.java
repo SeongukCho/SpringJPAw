@@ -165,7 +165,7 @@ public class NoticeController {
 
         log.info(this.getClass().getName() + ".noticeInfo Start!");
 
-        String nSeq = CmmUtil.nvl(request.getParameter("nSeq")); // 공지글번호(PK)
+        String nSeq = CmmUtil.nvl(request.getParameter("nSeq"), "0"); // 공지글번호(PK)
 
         /*
          * ####################################################################################
@@ -180,6 +180,7 @@ public class NoticeController {
         NoticeDTO pDTO = new NoticeDTO();
         pDTO.setNoticeSeq(Long.parseLong(nSeq));
 
+
         // 공지사항 상세정보 가져오기
         // Java 8부터 제공되는 Optional 활용하여 NPE(Null Pointer Exception) 처리
         NoticeDTO rDTO = Optional.ofNullable(noticeService.getNoticeInfo(pDTO, true))
@@ -187,6 +188,7 @@ public class NoticeController {
 
         // 조회된 리스트 결과값 넣어주기
         model.addAttribute("rDTO", rDTO);
+
 
         log.info(this.getClass().getName() + ".noticeInfo End!");
 

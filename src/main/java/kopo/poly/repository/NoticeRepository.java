@@ -17,8 +17,8 @@ public interface NoticeRepository extends JpaRepository<NoticeEntity, Long> {
     NoticeEntity findByNoticeSeq(Long noticeSeq);
 
     @Modifying(clearAutomatically = true)
-    @Query(value = "UPDATE NOTICE A SET A.READ_CNT = IFNULL(A.READ_CNT, 0) + 1 WHERE A.NOTICE_SEQ = :noticeSeq",
-            nativeQuery=true)
-    int updateReadCnt(@Param("noticeSeq") Long noticeSeq);
+    @Query(value = "UPDATE NOTICE A SET A.READ_CNT = IFNULL(A.READ_CNT, 0) + 1 WHERE A.NOTICE_SEQ = ?1",
+            nativeQuery = true)
+    int updateReadCnt(@Param(value = "noticeSeq") Long noticeSeq);
 
 }
